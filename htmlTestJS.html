@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <script>
+        let turnedOn = false;
+        function switchLight(){
+            const lightBulb = document.getElementById('light');
+           if(turnedOn){
+                lightBulb.src = 'img/pic_bulboff.gif'
+            }else{
+                lightBulb.src = 'img/pic_bulbon.gif'
+            }
+            turnedOn = !turnedOn;
+        }
+
+        function changeContent(){
+            const paragraph = document.getElementById('change');
+            paragraph.innerHTML = "Change content"
+        }
+    </script>
+</head>
+<body>
+    <h1>Html para teste de JavaScript</h1>
+    
+    <p id="change">Mudar de um texto...</p>
+
+    <button  type="button" onclick="document.getElementById('change').innerHTML = '....para outro.'">Try change!</button>
+    <button onclick="changeContent()">Change Function</button>
+
+    <button onclick="document.getElementById('light').src='img/pic_bulbon.gif'">Turn on</button>
+
+    <img id="light" src="img/pic_bulboff.gif" alt="pic_bulboff">
+
+    <button onclick="document.getElementById('light').src='img/pic_bulboff.gif'">Turn off</button>
+
+    <button onclick="switchLight()">Switch</button>
+
+    <button onclick="document.getElementById('change').style.fontSize='35px'">Get Bigger</button>
+    <button onclick="document.getElementById('change').style.fontSize='15px'">Get Smaller</button>
+    <button onclick="document.getElementById('change').style.visibility='hidden'">Hidden</button>
+    <button onclick="document.getElementById('change').style.visibility='visible'">Show</button>
+    <div style="width:100%;">
+        <div style="background-color: aqua; width: 50%; float: left;"><p id="calc" style="text-align: center;">a</p></div>
+        <div style="background-color: cadetblue;width: 50%; float: left;"><p>b</p></div>
+    </div>
+    <button onclick="document.getElementById('calc').innerHTML=5+6">Calcular</button>
+</body>
+</html>
