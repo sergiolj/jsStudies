@@ -19,6 +19,13 @@
             const paragraph = document.getElementById('change');
             paragraph.innerHTML = "Change content"
         }
+        function docWrite(){
+            document.write("Apagouuuuuuu!!! Apagoooouuuu!");
+        }
+        function showAlert(){
+            window.alert("Popup com mensagem de alerta?");
+        }
+
     </script>
 </head>
 <body>
@@ -42,9 +49,154 @@
     <button onclick="document.getElementById('change').style.visibility='hidden'">Hidden</button>
     <button onclick="document.getElementById('change').style.visibility='visible'">Show</button>
     <div style="width:100%;">
-        <div style="background-color: aqua; width: 50%; float: left;"><p id="calc" style="text-align: center;">a</p></div>
-        <div style="background-color: cadetblue;width: 50%; float: left;"><p>b</p></div>
+        <div id="left" style="background-color: aqua; width: 50%; float: left;"><p id="calc" style="text-align: center;">a</p></div>
+        <div id="right" style="background-color: cadetblue;width: 50%; float: left;"><p>b</p></div>
     </div>
     <button onclick="document.getElementById('calc').innerHTML=5+6">Calcular</button>
+    <button onclick="document.getElementById('left').style.backgroundColor='white'">Background Color Left</button>
+    <button onclick="docWrite()">document.write</button>
+
+ 
+    <button onclick="showAlert()">Popup?</button>
+    <button onclick="window.print()">Imprimir página</button>
+
+    <script>
+        let a, b, c;
+        a = 5; 
+        b = 3; 
+        c = a + b;
+        let d, e, f;
+        d=1; e=2; f=d*e;
+        /*Em final de statement não é obrigatório o uso de ponto e vígula, mas recomendado
+        Melhores práticas:
+        Não use linhas de código maiores de que 80 caracteres
+        Quando quebrar uma linha de código faça isso depois de um operador
+        */
+       var palavraChave; //A função var foi abandonada em 2015 e só deve ser usada em caso de necessidade de
+       //compatibilidade com browsers antigos.
+       const constantePi=3.1415; // const é uma variável que não pode ser alterado tipo nem valor nem valor, mas quando declaradas como
+       //objetos ou arrays suas propriedades internas podem ser alteradas
+       
+       function exemploVariavelDinamica(){ 
+        let minhaVariavel = 42;
+        setTimeout(console.log(typeof minhaVariavel),2000);
+       
+        minhaVariavel = "Agora é texto";
+        setTimeout(console.log(typeof minhaVariavel),2000);
+       //A declaração de tipo em JS é automática e pode variar durante a execução pois é dinâmica
+   
+        }
+       exemploVariavelDinamica();
+
+       function exemploConst(){
+        const minhaConst = 42; // declarada como numérica
+        console.log(typeof minhaConst, minhaConst);
+        // minhaConst = 2; //Erro de syntaxe
+        //Importante!!! Ao encontrar um erro em um código o JS aborta a execução do restante do código.
+
+        const arrayNome = { nome: "Maria"};
+        console.log(arrayNome);
+        arrayNome.nome = "Pedro";
+        console.log(arrayNome);
+       }
+
+       exemploConst();
+       /* O uso de let e const torna o código mais robusto e com práticas mais modernas de liguagem de programação
+       const precisa ser atribuído no momento da declaração enquanto o let permite a atribuição posterior à declaração.
+       const não define um valor constante e sim uma referência constante a um valor, por isso não é permitido mudar os valores de
+       const quando essa é primitiva, mas os valores armazenados em objetos e arrays podem ser mudados, inclusive criando novos atributos para
+       esses objetos ou arrays.
+       */ 
+       const pessoa = { nome: "Pedro", sobrenome: "Silva", idade:30};
+       console.log(pessoa.nome, pessoa.idade);
+
+       const arrayCarros = ["Fusca", "Gol", "Uno"]; //Cria um objeto array
+       arrayCarros[1] = "Chevete";
+
+       arrayCarros.push("Gol");
+
+       const carro = { marca:"Fiat", modelo:"Uno", cor: "Verde"};// Cria o objeto carro com determinados atributos
+       
+       carro.motor = "1.0"; //adiciona posteriormente um atributo motor ao carro.
+
+       let text1 = "Have a very ";
+       text1 += "nice day!!";
+
+       let x = 5 + 5;
+       let y = "5"; // y é uma conste do tipo String
+       console.log(y += x); // resultado 510
+       /**JS permite concatenação de strings e numeros de forma simples e direta o resultado 
+        * será uma string caso uma das duas seja string e o operador seja +
+        * no caso de outros operadores os resultados serão diferentes e há a tentativa de converter as 
+        * strings em números automaticamente de forma IMPLÍCITA OU EXPLICITA.
+        */
+       console.log(x+y);//resultado 10510
+       
+       //CONVERSÃO IMPLÍCITA
+       let a1 = "10";
+       let b1 = 5;
+       console.log(a1 * b1); // resultado 50
+
+       //CONVERSÃO EXPLICITA (Melhores práticas)
+       //O código determina como a variável let deve ser tratada em função do seu tipo.
+       let a2 = "10";
+       let b2 = 5;
+       console.log(Number(a2) + b2); //resultado 15
+       console.log(Number(a2) * b2); //resultado 50
+       console.log(String(a2) + b2); //resultado 105
+
+       console.log(typeof carro);
+       console.log(typeof arrayCarros);
+
+       //Operadores Aritméticos
+       /* Os operadores aritméticos em JS são semelhantes a outras linguagens com exceção do operador exponencial **
+       */
+       console.log(b1 ** 2); //Exponencial resultado 25
+       let result;
+       console.log(result = b2 % 2); //Resto da divisão inteira resultado 1
+       result++;
+       console.log(result); // resultado 2
+       console.log(result = Math.pow(result,2)); //resultado 4
+
+       let st = 16 + 4 + "Volvo"; //O resultado será uma string, mas somente depois de somar as parcelas numéricas 20Volvo
+       let st1 = "Volvo" + 16 + 4; //O resultado será uma string Volvo164
+       /**Isso acontece porque o JS avalia expressões da esquerda para a direita, como no segundo exemplo o primeiro operador
+        * é uma string, todo o restante é tratado como string.
+        */ 
+       //Todos os números em JS são floating point do typo double 64bits que podem ser representados com seus decimais ou não.
+       let x1 = 34.00;
+       let x2 = 34;
+
+       console.log(x1 == x2);//resultado true
+       let x3;
+       console.log(typeof x3); //resultado undefined
+       console.log(typeof x3 == "undefined"); //resultado true
+       console.log(typeof x2 == "undefined"); //resultado false
+
+       let car = ""; //Um valor vazio não é um tipo indefinido e sim uma string com valor vazio.
+
+       function toCelsius(fahrenheit) {
+            return (5/9) * (fahrenheit-32);
+        }
+
+        let value = toCelsius();
+        console.log(value);
+
+        function multiplicar(a, b) {
+            a = Number(a);
+            b = Number(b);
+            if (Number.isNaN(a) || Number.isNaN(b)) {
+                return "Entradas inválidas";
+            }
+        return a * b;
+        }
+
+    console.log(multiplicar("5", "10")); // 50
+    console.log(multiplicar("texto", 2)); // "Entradas inválidas"
+
+    let valuefunction = multiplicar;
+    console.log(valuefunction);
+    </script>
+
 </body>
 </html>
