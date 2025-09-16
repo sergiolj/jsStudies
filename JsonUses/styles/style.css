@@ -6,6 +6,8 @@ body{
 }
 
 .box{
+    justify-content: center;
+    align-items: center;
     padding: 5px 20px;
     display: flex;
     height: 80vh;
@@ -23,4 +25,19 @@ body{
     /* box-shadow: 10px 10px 15px rgb(0, 0, 0); /*deslocamento x, deslocamento y, tamanho do blur e cor com transparência
     Os valores de deslocamento positivos são para direita e para baixo*/
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2); /*adicionando transparência*/
+}
+a{
+    color: black;
+    font-size: 20px;
+}
+a:link{
+    text-decoration: none;
+}
+a:visited{
+    text-decoration: none;
+}
+a:hover{
+    color: white;
+    font-size: 30px;
+
 }
