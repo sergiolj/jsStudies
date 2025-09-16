@@ -1,0 +1,26 @@
+body{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.box{
+    padding: 50px 20px;
+    display: flex;
+    height: 30vh;
+    width: 50%;
+    /*align-items: center; /*Serve para alinhar os elementos filhos e como não há nenhum não exibe efeitos*/
+    background-color: rgb(166, 242, 252);
+    border-radius: 20px;
+    /*Se não informar o estilo da borda a mesma não será exibida
+    border-style: solid;
+    border-color: rgb(121, 163, 163);
+    border-width: 15px;*/
+    /*Forma recomendada: Comando condensado*/
+    border: 5px solid rgb(121,163,163);
+
+    /* box-shadow: 10px 10px 15px rgb(0, 0, 0); /*deslocamento x, deslocamento y, tamanho do blur e cor com transparência
+    Os valores de deslocamento positivos são para direita e para baixo*/
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2); /*adicionando transparência*/
+}

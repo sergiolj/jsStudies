@@ -196,7 +196,47 @@
 
     let valuefunction = multiplicar;
     console.log(valuefunction);
+
+    function calculate(p1, p2){
+        let result = p1*p2;
+        return result;
+    }
+
+
     </script>
 
+    <p>That's the total of your bill:  <span id="sum"></span></p>
+    <p>Function inside a variable: <span id="convert"></span></p>
+    
+<script>
+        let value1 = 77;
+    function toCelsius(value1){
+        return (5/9) * (value1-32);
+    }
+    let txt = "The farenheit temperature of " + value1 + "°F it's equivalent to " +toCelsius(value1)+ "°C degrees celsius.";
+    document.getElementById('convert').innerHTML=txt;
+
+      document.getElementById("sum").innerHTML=calculate(2,3);
+</script>
+
+<script>
+let carro = 'Fiat';
+
+//Melhores práticas determinam que objetos sejam declarados como const.
+const carro = {type: "SUV", model: "EcoSport", color:"Blue"};
+
+const persona = {};// Método mais comum de instanciar um objeto (Método literal)
+
+persona.name = "Luiz";
+persona.age = 35;
+persona.eyeColor = "green";
+
+const people = new Object(); //Este método de declaração é válido, mas normalmente não utilizado
+people.name = "Carlos";
+people.age = 24;
+
+
+
+</script>
 </body>
 </html>
