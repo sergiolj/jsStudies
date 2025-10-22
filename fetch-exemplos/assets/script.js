@@ -82,7 +82,9 @@ console.log('Exercício 3. Criando um novo post com POST');
 
     class Post{
         constructor(title, body, userId){
-            if(!title || title.trim() ===''){
+            if(!title || title.trim() ===''){ 
+                /*=== significa que o tipo e o dado devem ser iguais. OBSOLETO!! NÃO USAR "==" que compara fazendo conversão de tipo
+                como, por exemplo, 0 == false (true) ou 5 == "5" (true). CORRETO E MODERNO -> 0 === false (false) 5 === "5" (false) */
                 throw new Error('O campo Título é obrigatório');
             }
             this.title = title;
@@ -189,14 +191,14 @@ async function postsGET() {
     }
 }
 
-async function postsIdGET() {
+ async function postsIdGET() {
     var RESOURCE_ID = 10;
     var RESOURCE_COMPLETE_URL =`${API_BASE_URL}${RESOURCE_NAME}${'/'}${RESOURCE_ID}`;
     try{
         const response = await fetch(RESOURCE_COMPLETE_URL);
         const data =await response.json();
 
-        console.log('1. Exercício 2.1 Buscar o post com id específico com GET usando async/await')
+        console.log('2. Exercício 2.1 Buscar o post com id específico com GET usando async/await')
         console.log('URL e recurso a ser chamado: ',RESOURCE_COMPLETE_URL);
         console.log('Post Id: ', data.id, ', Title: ', data.title);
 
@@ -205,16 +207,112 @@ async function postsIdGET() {
     }
 }
 
-async function postsNewPOST() {}
+async function postsNewPOST() {
+    class Post {
+        constructor(title, body, userId){
+            if(!title || title.length === 0 || title.trim() === ""){
+                throw new Error(' ');
+            }
+            this.id = null;
+            this.title = title;
+            this.body = body;
+            this.userId = userId;
+        }
+    }
 
-async function postsUpdatePUT() {}
+    const NEWPOST = new Post(
+        'Viagem ao centro da Terra',
+        'Filme antigo em PB baseado no livro de Julio Verne',
+        1
+        );
 
-async function postsEraseDELETE() {}
+    const RESOURCE_COMPLETE_URL = `${API_BASE_URL}${RESOURCE_NAME}`;
+    console.log('Gravando novo post: ' , RESOURCE_COMPLETE_URL);
+        fetch(RESOURCE_COMPLETE_URL, {
+            method: 'POST',
+            body: JSON.stringify(NEWPOST),
+            headers: {
+                'Content-Type' : 'application/json; charset=UTF-8'
+            }
+        })
+        .then(response => {
+            console.log('Gravando novo post (Status): ', response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Resposta completa: ', data);
+            console.log('Dados gravados: ', data.title, ' : ', data.body);
+        })
+        .catch(error => console.error('Erro ao gravar novo post: ', error));
+}
 
+async function postsUpdatePUT() {
+    RESOURCE_COMPLETE_URL = `${API_BASE_URL}${RESOURCE_NAME}/1`;
+    //1. Criando o objeto para receber o Post
+    let ACTUALPOST;
+    
+    //2. Recuperando os dados do Post com GET
+    try{
+        const response = await fetch(RESOURCE_COMPLETE_URL);
+        if(!response.ok){
+            throw new Error('Erro ao buscar post: ', `${response.status}`);
+        }
+        ACTUALPOST = await response.json();
+        console.log('Recuperado: ', ACTUALPOST);
+    }catch (error){
+        console.error('Erro', error);
+    }
 
-postsGET();
-postsIdGET();
-postsNewPOST();
-postsUpdatePUT();
-postsEraseDELETE();
+    //3. Modificando o objeto
+    ACTUALPOST.title = 'Novo Título para o post 1 recuperado';
 
+    //4. Gravando a resposta com o objeto modificado
+    try{
+        const response = await fetch(RESOURCE_COMPLETE_URL, {
+            method: "PUT", 
+            body: JSON.stringify(ACTUALPOST),
+            headers: {
+                'Content-Type' : 'application/json ; charset=UTF-8'
+            }
+        });
+        const data = await response.json();
+        
+        console.log('Post atualizado com sucesso (PUT): ', response.status);
+        console.log('Post atualizado: ', data);
+
+    }catch(error){
+        console.error('Erro: ', error);
+    }
+
+}
+
+async function postsEraseDELETE() {
+    const RESOURCE_COMPLETE_URL = `${API_BASE_URL}${RESOURCE_NAME}/10`;
+
+    try{
+        const response = await fetch(RESOURCE_COMPLETE_URL, {
+            method: "DELETE",
+        })
+        if(response.ok){
+             console.log('Registro apagado com sucesso (Status): ', response.status);
+        }else{
+            console.warn('Falha ao apagar registro (Status): ', response.status)
+        }
+       
+
+    }catch (error){
+        console.error('Erro ao deletar registro', error);
+    }
+}
+
+async function allFunctionsSync() {
+   
+    await postsGET();
+    await postsIdGET();
+    await postsNewPOST();
+    await postsUpdatePUT();
+    await postsEraseDELETE(); 
+
+}
+
+allFunctionsSync();
